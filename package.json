@@ -1,0 +1,27 @@
+{
+  "name": "lifewize-portals",
+  "version": "1.0.0",
+  "description": "Unified monorepo for LIFEWiZE agent portals",
+  "private": true,
+  "workspaces": [
+    "resource-center",
+    "ai-sales-call-trainer"
+  ],
+  "scripts": {
+    "dev:resource-center": "npm run dev --workspace=resource-center",
+    "dev:ai-trainer": "npm run dev --workspace=ai-sales-call-trainer",
+    "build:resource-center": "npm run build --workspace=resource-center",
+    "build:ai-trainer": "npm run build --workspace=ai-sales-call-trainer",
+    "build:all": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "clean": "rm -rf **/node_modules **/.next **/dist **/.turbo"
+  },
+  "keywords": [
+    "lifewize",
+    "portals",
+    "monorepo",
+    "nextjs"
+  ],
+  "author": "LIFEWiZE",
+  "license": "PROPRIETARY"
+}
