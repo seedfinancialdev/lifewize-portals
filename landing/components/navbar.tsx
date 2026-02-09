@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -33,10 +34,15 @@ export default function Navbar() {
     >
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
-          <span className="font-display text-xl font-bold tracking-tight text-foreground">
-            LIFE<span className="gradient-text">Wi</span>ZE
-          </span>
+        <a href="#" className="flex items-center">
+          <Image
+            src="/logo-dark.png"
+            alt="LIFEWiZE"
+            width={140}
+            height={36}
+            className="h-8 w-auto"
+            priority
+          />
         </a>
 
         {/* Desktop Nav */}
