@@ -1,7 +1,18 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const productLinks = [
   { label: "All Features", href: "/features" },
@@ -36,9 +47,15 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 pt-16 pb-8">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12"
+        >
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <motion.div variants={fadeUp} className="col-span-2 md:col-span-1">
             <Link href="/">
               <Image
                 src="/logo-dark.png"
@@ -52,10 +69,10 @@ export default function Footer() {
               The operating system for elite life agents. Build, run, and scale
               your insurance business.
             </p>
-          </div>
+          </motion.div>
 
           {/* Product */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-sm font-semibold text-foreground mb-4">
               Product
             </h4>
@@ -71,10 +88,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Platform */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-sm font-semibold text-foreground mb-4">
               Platform
             </h4>
@@ -90,10 +107,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Company */}
-          <div>
+          <motion.div variants={fadeUp}>
             <h4 className="text-sm font-semibold text-foreground mb-4">
               Company
             </h4>
@@ -109,18 +126,24 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
           <p className="text-xs text-muted">
             &copy; {year} LIFEWiZE. All rights reserved.
           </p>
           <p className="text-xs text-muted">
             Built with ❤️ for life agents
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

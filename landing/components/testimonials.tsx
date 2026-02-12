@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 const testimonials = [
   {
     quote:
@@ -36,9 +38,10 @@ export default function Testimonials() {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={spring}
           className="text-center mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
@@ -55,10 +58,10 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 40, scale: 0.93, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ ...spring, delay: i * 0.12 }}
               className="glass rounded-2xl p-6 flex flex-col"
             >
               {/* Stars */}

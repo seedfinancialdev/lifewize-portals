@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 interface Tier {
   name: string;
   price: string;
@@ -94,9 +96,10 @@ export default function PricingSection() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={spring}
           className="text-center mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
@@ -117,10 +120,10 @@ export default function PricingSection() {
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 40, scale: 0.93, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ ...spring, delay: i * 0.12 }}
               className={cn(
                 "relative rounded-3xl p-8 flex flex-col",
                 tier.highlighted

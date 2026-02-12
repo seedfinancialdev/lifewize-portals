@@ -19,16 +19,21 @@ const accentBgMap: Record<string, string> = {
   indigo: "from-indigo-500/20 to-indigo-500/5",
 };
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 const container = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.07 },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 40, scale: 0.92, filter: "blur(8px)" },
+  show: {
+    opacity: 1, y: 0, scale: 1, filter: "blur(0px)",
+    transition: { ...spring },
+  },
 };
 
 export default function FeaturesGrid() {
@@ -39,9 +44,10 @@ export default function FeaturesGrid() {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={spring}
           className="text-center mb-16"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">

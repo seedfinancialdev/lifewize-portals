@@ -1,15 +1,28 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Star, TrendingUp, Shield, Users, Zap, BarChart3 } from "lucide-react";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 20 };
+const blurUp = (delay: number) => ({
+  initial: { opacity: 0, y: 30, filter: "blur(10px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  transition: { ...spring, delay },
+});
+
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Mesh */}
       <div className="absolute inset-0 bg-gradient-mesh" />
-      <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
-      <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-pulse-glow" />
+      <motion.div style={{ y: orbY1 }} className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
+      <motion.div style={{ y: orbY2 }} className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-pulse-glow" />
 
       {/* Main Content — Two Column */}
       <div className="container mx-auto px-6 pt-28 pb-20 relative z-10">
@@ -18,9 +31,7 @@ export default function Hero() {
           <div>
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              {...blurUp(0.1)}
               className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 mb-8"
             >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -31,9 +42,7 @@ export default function Hero() {
 
             {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              {...blurUp(0.2)}
               className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6"
             >
               The Operating System for{" "}
@@ -42,9 +51,7 @@ export default function Hero() {
 
             {/* Subheadline */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              {...blurUp(0.35)}
               className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
             >
               Everything you need to build, run, and scale your insurance business
@@ -54,9 +61,7 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              {...blurUp(0.5)}
               className="flex flex-col sm:flex-row gap-4 mb-14"
             >
               <a
@@ -77,9 +82,9 @@ export default function Hero() {
 
             {/* Social Proof */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ ...spring, delay: 0.7 }}
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             >
               {/* Avatar Stack */}
@@ -124,9 +129,9 @@ export default function Hero() {
 
           {/* Right Column — Dashboard Mockup */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
+            initial={{ opacity: 0, x: 60, scale: 0.92, filter: "blur(12px)" }}
+            animate={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
+            transition={{ ...spring, delay: 0.4 }}
             className="hidden lg:block relative"
           >
             {/* Glow behind the card stack */}

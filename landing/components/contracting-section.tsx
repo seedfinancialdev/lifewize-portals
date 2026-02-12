@@ -12,6 +12,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 const benefits = [
   "Top carrier access with competitive commissions",
   "Full platform access at $500/mo (vs $1,000/mo)",
@@ -40,9 +42,10 @@ export default function ContractingSection() {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={spring}
             className="text-center mb-16"
           >
             <span className="text-sm font-semibold text-gold uppercase tracking-widest">
@@ -61,9 +64,10 @@ export default function ContractingSection() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Benefits Card */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, x: -40, scale: 0.95, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={spring}
               className="rounded-3xl border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent p-8 md:p-10"
             >
               <h3 className="font-display text-2xl font-bold mb-2 text-foreground">
@@ -112,9 +116,10 @@ export default function ContractingSection() {
 
             {/* Requirements Card */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, x: 40, scale: 0.95, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ ...spring, delay: 0.1 }}
               className="rounded-3xl glass p-8 md:p-10"
             >
               <h3 className="font-display text-2xl font-bold mb-2 text-foreground">

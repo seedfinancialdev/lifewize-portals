@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,15 +37,25 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "glass-strong shadow-lg shadow-black/20" : "bg-transparent"
-      )}
-    >
+    <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-primary-glow z-[60] origin-left"
+      />
+      <motion.header
+        initial={{ y: -20, opacity: 0, filter: "blur(8px)" }}
+        animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+        transition={{ type: "spring", stiffness: 80, damping: 20 }}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled ? "glass-strong shadow-lg shadow-black/20" : "bg-transparent"
+        )}
+      >
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -203,5 +213,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </motion.header>
+    </>
   );
 }

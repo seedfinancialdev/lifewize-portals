@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 export default function FinalCta() {
   return (
     <section className="relative py-24 overflow-hidden">
@@ -13,9 +15,10 @@ export default function FinalCta() {
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={spring}
           className="text-center max-w-3xl mx-auto"
         >
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">

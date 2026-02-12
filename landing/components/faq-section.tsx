@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
+
 const faqs = [
   {
     q: "What is LIFEWiZE?",
@@ -65,7 +67,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ type: "spring", stiffness: 200, damping: 24 }}
             className="overflow-hidden"
           >
             <p className="text-muted-foreground text-sm leading-relaxed pb-5">
@@ -85,9 +87,10 @@ export default function FaqSection() {
         <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={spring}
             className="text-center mb-12"
           >
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">
@@ -101,9 +104,10 @@ export default function FaqSection() {
 
           {/* FAQ Items */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={spring}
           >
             {faqs.map((faq, i) => (
               <FaqItem key={i} q={faq.q} a={faq.a} />
