@@ -11,6 +11,7 @@ import {
   UserCheck,
   ArrowRight,
 } from "lucide-react";
+import MagneticButton from "@/components/ui/magnetic-button";
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
 
@@ -105,13 +106,13 @@ export default function ContractingSection() {
                 </p>
               </div>
 
-              <a
+              <MagneticButton
                 href="#"
                 className="mt-6 inline-flex items-center justify-center gap-2 w-full text-base font-semibold text-background bg-gradient-to-r from-gold to-gold-light px-8 py-4 rounded-full hover:shadow-xl hover:shadow-gold/25 transition-all group"
               >
                 Apply for Contracting
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </MagneticButton>
             </motion.div>
 
             {/* Requirements Card */}

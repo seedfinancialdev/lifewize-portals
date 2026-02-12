@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import MagneticButton from "@/components/ui/magnetic-button";
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
 
@@ -10,8 +11,16 @@ export default function FinalCta() {
     <section className="relative py-24 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-card to-gold/10" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+      <motion.div
+        animate={{ y: [0, -15, 0], scale: [1, 1.06, 1] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{ y: [0, 10, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-0 right-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl"
+      />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -29,13 +38,14 @@ export default function FinalCta() {
             Join 500+ life agents who are building, running, and growing their
             businesses with LIFEWIZE. Start your free trial today.
           </p>
-          <a
+          <MagneticButton
             href="#pricing"
+            strength={0.4}
             className="inline-flex items-center justify-center gap-2 text-lg font-semibold text-primary-foreground bg-gradient-to-r from-primary to-primary-glow px-10 py-5 rounded-full hover:shadow-2xl hover:shadow-primary/30 transition-all group"
           >
             Start Your Free Trial
             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </MagneticButton>
           <p className="text-sm text-muted mt-4">
             No credit card required · Cancel anytime
           </p>

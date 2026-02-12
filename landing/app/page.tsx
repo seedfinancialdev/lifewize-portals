@@ -7,17 +7,28 @@ import Testimonials from "@/components/testimonials";
 import FaqSection from "@/components/faq-section";
 import FinalCta from "@/components/final-cta";
 import Footer from "@/components/footer";
+import ParallaxSection from "@/components/ui/parallax-section";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
-      <FeaturesGrid />
-      <ContractingSection />
-      <PricingSection />
-      <Testimonials />
-      <FaqSection />
+      <ParallaxSection speed={0.03}>
+        <FeaturesGrid />
+      </ParallaxSection>
+      <ParallaxSection speed={0.04}>
+        <ContractingSection />
+      </ParallaxSection>
+      <ParallaxSection speed={0.03}>
+        <PricingSection />
+      </ParallaxSection>
+      <ParallaxSection speed={0.02}>
+        <Testimonials />
+      </ParallaxSection>
+      <ParallaxSection speed={0.03}>
+        <FaqSection />
+      </ParallaxSection>
       <FinalCta />
       <Footer />
     </>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import MagneticButton from "@/components/ui/magnetic-button";
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
 
@@ -127,10 +128,22 @@ export default function PricingSection() {
               className={cn(
                 "relative rounded-3xl p-8 flex flex-col",
                 tier.highlighted
-                  ? "glass-strong border-primary/30 shadow-xl shadow-primary/10 scale-[1.02]"
+                  ? "glass-strong shadow-xl shadow-primary/10 scale-[1.02]"
                   : "glass"
               )}
             >
+              {/* Animated gradient border for highlighted card */}
+              {tier.highlighted && (
+                <div className="absolute -inset-[1px] rounded-3xl overflow-hidden -z-10">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0%,hsl(var(--primary))_20%,transparent_40%,hsl(var(--primary)/0.3)_60%,transparent_80%)]"
+                  />
+                  <div className="absolute inset-[1px] rounded-3xl bg-card" />
+                </div>
+              )}
+
               {/* Badge */}
               {tier.badge && (
                 <div
@@ -189,7 +202,7 @@ export default function PricingSection() {
               </div>
 
               {/* CTA */}
-              <a
+              <MagneticButton
                 href={tier.ctaStyle === "gold" ? "#contracting" : "#"}
                 className={cn(
                   "inline-flex items-center justify-center gap-2 w-full text-base font-semibold px-6 py-3.5 rounded-full transition-all group",
@@ -203,7 +216,7 @@ export default function PricingSection() {
               >
                 {tier.cta}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </MagneticButton>
 
               {/* Note */}
               {tier.note && (

@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { features } from "@/lib/features-data";
 import { resolveIcon } from "@/lib/icons";
+import TiltCard from "@/components/ui/tilt-card";
 
 const accentBgMap: Record<string, string> = {
   emerald: "from-emerald-500/20 to-emerald-500/5",
@@ -79,6 +80,7 @@ export default function FeaturesGrid() {
 
             return (
               <motion.div key={feature.slug} variants={item}>
+                <TiltCard className="h-full">
                 <Link
                   href={`/features/${feature.slug}`}
                   className="group block glass rounded-2xl p-6 h-full hover:bg-white/[0.08] transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
@@ -104,6 +106,7 @@ export default function FeaturesGrid() {
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </Link>
+                </TiltCard>
               </motion.div>
             );
           })}

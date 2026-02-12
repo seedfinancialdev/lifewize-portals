@@ -3,6 +3,11 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, Star, TrendingUp, Shield, Users, Zap, BarChart3 } from "lucide-react";
+import MagneticButton from "@/components/ui/magnetic-button";
+import CountUp from "@/components/ui/count-up";
+
+const headlineWords = ["The", "Operating", "System", "for"];
+const gradientWords = ["Elite", "Life", "Agents"];
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 20 };
 const blurUp = (delay: number) => ({
@@ -21,8 +26,23 @@ export default function Hero() {
     <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Mesh */}
       <div className="absolute inset-0 bg-gradient-mesh" />
-      <motion.div style={{ y: orbY1 }} className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
-      <motion.div style={{ y: orbY2 }} className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gold/5 rounded-full blur-3xl animate-pulse-glow" />
+      <motion.div
+        style={{ y: orbY1 }}
+        animate={{ scale: [1, 1.08, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+      />
+      <motion.div
+        style={{ y: orbY2 }}
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-1/4 -left-32 w-80 h-80 bg-gold/5 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/3 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+      />
 
       {/* Main Content — Two Column */}
       <div className="container mx-auto px-6 pt-28 pb-20 relative z-10">
@@ -40,14 +60,31 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              {...blurUp(0.2)}
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6"
-            >
-              The Operating System for{" "}
-              <span className="gradient-text">Elite Life Agents</span>
-            </motion.h1>
+            {/* Headline — Word by Word */}
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
+              {headlineWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ ...spring, delay: 0.2 + i * 0.08 }}
+                  className="inline-block mr-[0.3em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              {gradientWords.map((word, i) => (
+                <motion.span
+                  key={`g-${i}`}
+                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ ...spring, delay: 0.2 + (headlineWords.length + i) * 0.08 }}
+                  className="inline-block mr-[0.3em] gradient-text"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h1>
 
             {/* Subheadline */}
             <motion.p
@@ -64,20 +101,20 @@ export default function Hero() {
               {...blurUp(0.5)}
               className="flex flex-col sm:flex-row gap-4 mb-14"
             >
-              <a
+              <MagneticButton
                 href="#pricing"
                 className="inline-flex items-center justify-center gap-2 text-base font-semibold text-primary-foreground bg-gradient-to-r from-primary to-primary-glow px-8 py-4 rounded-full hover:shadow-xl hover:shadow-primary/25 transition-all group"
               >
                 Start Your Free Trial
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
+              </MagneticButton>
+              <MagneticButton
                 href="#pricing"
                 className="inline-flex items-center justify-center gap-2 text-base font-semibold text-foreground glass px-8 py-4 rounded-full hover:bg-white/10 transition-all"
               >
                 <Play className="h-4 w-4" />
                 See Pricing
-              </a>
+              </MagneticButton>
             </motion.div>
 
             {/* Social Proof */}
@@ -106,7 +143,7 @@ export default function Hero() {
                     ))}
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    Trusted by <span className="text-foreground font-semibold">500+</span> agents
+                    Trusted by <CountUp target={500} suffix="+" className="text-foreground font-semibold" /> agents
                   </p>
                 </div>
               </div>
@@ -116,11 +153,15 @@ export default function Hero() {
               {/* Stats */}
               <div className="flex gap-6">
                 <div>
-                  <p className="text-lg font-bold text-foreground">$50M+</p>
+                  <p className="text-lg font-bold text-foreground">
+                    <CountUp target={50} prefix="$" suffix="M+" />
+                  </p>
                   <p className="text-xs text-muted-foreground">Premium Written</p>
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-foreground">98%</p>
+                  <p className="text-lg font-bold text-foreground">
+                    <CountUp target={98} suffix="%" />
+                  </p>
                   <p className="text-xs text-muted-foreground">Satisfaction</p>
                 </div>
               </div>
