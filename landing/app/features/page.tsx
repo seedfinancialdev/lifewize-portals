@@ -4,6 +4,7 @@ import { features } from "@/lib/features-data";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import FeaturesOverviewGrid from "@/components/features-overview-grid";
+import PageTransition from "@/components/page-transition";
 
 export const metadata: Metadata = {
   title: "All Features — The Complete Agent Toolkit | LIFEWiZE",
@@ -19,10 +20,10 @@ export const metadata: Metadata = {
 
 export default function FeaturesPage() {
   return (
-    <>
+    <PageTransition>
       <Navbar />
       <FeaturesOverviewGrid />
       <Footer />
-    </>
+    </PageTransition>
   );
 }

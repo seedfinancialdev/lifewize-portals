@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import SplashScreen from "@/components/splash-screen";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${outfit.variable} font-sans min-h-screen`}
       >
+        <SplashScreen />
         {children}
       </body>
     </html>

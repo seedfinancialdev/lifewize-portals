@@ -45,3 +45,9 @@
     @apply py-20 md:py-28 lg:py-32;
   }
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

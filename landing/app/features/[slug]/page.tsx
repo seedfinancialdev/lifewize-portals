@@ -6,6 +6,7 @@ import FeaturePageHero from "@/components/feature-page-hero";
 import FeatureSections from "@/components/feature-sections";
 import FeaturePageCta from "@/components/feature-page-cta";
 import Footer from "@/components/footer";
+import PageTransition from "@/components/page-transition";
 
 interface Props {
   params: { slug: string };
@@ -35,12 +36,12 @@ export default function FeaturePage({ params }: Props) {
   if (!feature) notFound();
 
   return (
-    <>
+    <PageTransition>
       <Navbar />
       <FeaturePageHero feature={feature} />
       <FeatureSections sections={feature.sections} accentColor={feature.accentColor} />
       <FeaturePageCta currentSlug={feature.slug} />
       <Footer />
-    </>
+    </PageTransition>
   );
 }

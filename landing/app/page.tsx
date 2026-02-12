@@ -8,10 +8,11 @@ import FaqSection from "@/components/faq-section";
 import FinalCta from "@/components/final-cta";
 import Footer from "@/components/footer";
 import ParallaxSection from "@/components/ui/parallax-section";
+import PageTransition from "@/components/page-transition";
 
 export default function Home() {
   return (
-    <>
+    <PageTransition>
       <Navbar />
       <Hero />
       <ParallaxSection speed={0.03}>
@@ -31,6 +32,6 @@ export default function Home() {
       </ParallaxSection>
       <FinalCta />
       <Footer />
-    </>
+    </PageTransition>
   );
 }
