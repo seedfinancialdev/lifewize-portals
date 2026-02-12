@@ -38,7 +38,7 @@ export default function FeaturePage({ params }: Props) {
     <>
       <Navbar />
       <FeaturePageHero feature={feature} />
-      <FeatureSections sections={feature.sections} />
+      <FeatureSections sections={feature.sections} accentColor={feature.accentColor} />
       <FeaturePageCta currentSlug={feature.slug} />
       <Footer />
     </>
