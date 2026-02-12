@@ -1,10 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { features } from "@/lib/features-data";
 import { resolveIcon } from "@/lib/icons";
+
+const accentTextMap: Record<string, string> = {
+  emerald: "text-emerald-400",
+  cyan: "text-cyan-400",
+  blue: "text-blue-400",
+  violet: "text-violet-400",
+  pink: "text-pink-400",
+  amber: "text-amber-400",
+  orange: "text-orange-400",
+  rose: "text-rose-400",
+  teal: "text-teal-400",
+  indigo: "text-indigo-400",
+};
 
 const accentBgMap: Record<string, string> = {
   emerald: "from-emerald-500/20 to-emerald-500/5",
@@ -21,9 +34,7 @@ const accentBgMap: Record<string, string> = {
 
 const container = {
   hidden: {},
-  show: {
-    transition: { staggerChildren: 0.08 },
-  },
+  show: { transition: { staggerChildren: 0.06 } },
 };
 
 const item = {
@@ -31,30 +42,26 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-export default function FeaturesGrid() {
+export default function FeaturesOverviewGrid() {
   return (
-    <section id="features" className="section-padding relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
+    <section className="pt-32 pb-24">
+      <div className="container mx-auto px-6">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
           <span className="text-sm font-semibold text-primary uppercase tracking-widest">
-            Everything You Need
+            Platform Features
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 mb-5">
-            Your All-in-One{" "}
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mt-3 mb-5">
+            Your Complete{" "}
             <span className="gradient-text">Agent Toolkit</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Stop juggling 10 different tools. LIFEWIZE puts everything under one
-            roof so you can focus on what matters — closing deals and growing
-            your book.
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Everything you need to build, run, and scale your insurance
+            business — all under one roof.
           </p>
         </motion.div>
 
@@ -62,19 +69,19 @@ export default function FeaturesGrid() {
         <motion.div
           variants={container}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5"
+          animate="show"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto"
         >
-          {features.map((feature) => {
-            const Icon = resolveIcon(feature.iconName);
-            const accent =
-              accentBgMap[feature.accentColor] ?? accentBgMap.emerald;
+          {features.map((f) => {
+            const Icon = resolveIcon(f.iconName);
+            const accent = accentBgMap[f.accentColor] ?? accentBgMap.emerald;
+            const textColor =
+              accentTextMap[f.accentColor] ?? accentTextMap.emerald;
 
             return (
-              <motion.div key={feature.slug} variants={item}>
+              <motion.div key={f.slug} variants={item}>
                 <Link
-                  href={`/features/${feature.slug}`}
+                  href={`/features/${f.slug}`}
                   className="group block glass rounded-2xl p-6 h-full hover:bg-white/[0.08] transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
                 >
                   {/* Icon */}
@@ -85,15 +92,17 @@ export default function FeaturesGrid() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="font-semibold text-foreground mb-2 text-lg">
-                    {feature.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                    {feature.description}
+                  <h2 className="font-semibold text-foreground text-lg mb-2">
+                    {f.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                    {f.description}
                   </p>
 
                   {/* Link hint */}
-                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span
+                    className={`inline-flex items-center gap-1 text-xs font-semibold ${textColor} opacity-0 group-hover:opacity-100 transition-opacity`}
+                  >
                     Learn more
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>

@@ -50,7 +50,7 @@ export default function ContractingSection() {
             </span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 mb-5">
               Get Contracted Through{" "}
-              <span className="gradient-text-gold">LIFEWIZE Financial</span>
+              <span className="gradient-text-gold">LIFEWiZE Financial</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               We&apos;re not just a platform — we&apos;re a partner. Get contracted,

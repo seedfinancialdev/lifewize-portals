@@ -1,5 +1,35 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+
+const productLinks = [
+  { label: "All Features", href: "/features" },
+  { label: "CRM Suite", href: "/features/crm" },
+  { label: "AI Call Trainer", href: "/features/ai-call-trainer" },
+  { label: "Marketing Automation", href: "/features/marketing-automation" },
+  { label: "Funnel Builder", href: "/features/funnel-builder" },
+  { label: "Social Media Manager", href: "/features/social-media-manager" },
+];
+
+const platformLinks = [
+  { label: "Community Hub", href: "/features/community" },
+  { label: "Calendar & Scheduling", href: "/features/calendar" },
+  { label: "Lead Center", href: "/features/lead-center" },
+  { label: "Resource Library", href: "/features/resource-library" },
+  { label: "Training Academy", href: "/features/training-academy" },
+  { label: "Pricing", href: "/#pricing" },
+];
+
+const companyLinks = [
+  { label: "Contracting", href: "/#contracting" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "About", href: "#" },
+  { label: "Contact", href: "#" },
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -9,9 +39,15 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <span className="font-display text-xl font-bold tracking-tight text-foreground">
-              LIFE<span className="gradient-text">Wi</span>ZE
-            </span>
+            <Link href="/">
+              <Image
+                src="/logo-dark.png"
+                alt="LIFEWiZE"
+                width={120}
+                height={32}
+                className="h-7 w-auto"
+              />
+            </Link>
             <p className="text-sm text-muted-foreground mt-3 max-w-xs">
               The operating system for elite life agents. Build, run, and scale
               your insurance business.
@@ -24,39 +60,35 @@ export default function Footer() {
               Product
             </h4>
             <ul className="space-y-2.5">
-              {["Features", "Pricing", "Contracting", "AI Sales Trainer", "CRM"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+              {productLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Platform */}
           <div>
             <h4 className="text-sm font-semibold text-foreground mb-4">
-              Resources
+              Platform
             </h4>
             <ul className="space-y-2.5">
-              {["Community", "Resource Center", "Blog", "Support", "FAQ"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+              {platformLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -66,18 +98,16 @@ export default function Footer() {
               Company
             </h4>
             <ul className="space-y-2.5">
-              {["About", "Careers", "Contact", "Privacy Policy", "Terms of Service"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+              {companyLinks.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
