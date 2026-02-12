@@ -36,12 +36,14 @@ export default function FeaturePage({ params }: Props) {
   if (!feature) notFound();
 
   return (
-    <PageTransition>
+    <>
       <Navbar />
-      <FeaturePageHero feature={feature} />
-      <FeatureSections sections={feature.sections} accentColor={feature.accentColor} />
-      <FeaturePageCta currentSlug={feature.slug} />
-      <Footer />
-    </PageTransition>
+      <PageTransition>
+        <FeaturePageHero feature={feature} />
+        <FeatureSections sections={feature.sections} accentColor={feature.accentColor} />
+        <FeaturePageCta currentSlug={feature.slug} />
+        <Footer />
+      </PageTransition>
+    </>
   );
 }

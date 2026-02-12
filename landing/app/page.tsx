@@ -12,8 +12,9 @@ import PageTransition from "@/components/page-transition";
 
 export default function Home() {
   return (
-    <PageTransition>
+    <>
       <Navbar />
+      <PageTransition>
       <Hero />
       <ParallaxSection speed={0.03}>
         <FeaturesGrid />
@@ -32,6 +33,7 @@ export default function Home() {
       </ParallaxSection>
       <FinalCta />
       <Footer />
-    </PageTransition>
+      </PageTransition>
+    </>
   );
 }

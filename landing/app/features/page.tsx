@@ -20,10 +20,12 @@ export const metadata: Metadata = {
 
 export default function FeaturesPage() {
   return (
-    <PageTransition>
+    <>
       <Navbar />
-      <FeaturesOverviewGrid />
-      <Footer />
-    </PageTransition>
+      <PageTransition>
+        <FeaturesOverviewGrid />
+        <Footer />
+      </PageTransition>
+    </>
   );
 }
