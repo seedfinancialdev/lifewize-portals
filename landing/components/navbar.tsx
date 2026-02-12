@@ -52,9 +52,9 @@ export default function Navbar() {
           <Image
             src="/logo-dark.png"
             alt="LIFEWiZE"
-            width={140}
-            height={36}
-            className="h-8 w-auto"
+            width={210}
+            height={54}
+            className="h-12 w-auto"
             priority
           />
         </Link>
@@ -82,9 +82,9 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[520px] glass-strong rounded-2xl border border-white/10 p-4 shadow-2xl shadow-black/40"
+                  className="absolute top-full left-0 mt-3 w-[900px] rounded-2xl border border-white/10 bg-[#0c1117] p-5 shadow-2xl shadow-black/60"
                 >
-                  <div className="grid grid-cols-2 gap-1">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                     {features.map((f) => {
                       const Icon = resolveIcon(f.iconName);
                       return (
@@ -92,16 +92,16 @@ export default function Navbar() {
                           key={f.slug}
                           href={`/features/${f.slug}`}
                           onClick={() => setFeaturesOpen(false)}
-                          className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-white/[0.06] transition-colors group"
+                          className="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-white/[0.06] transition-colors group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
-                            <Icon className="h-4 w-4 text-foreground" />
+                          <div className="w-9 h-9 rounded-lg bg-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
+                            <Icon className="h-4.5 w-4.5 text-foreground" />
                           </div>
-                          <div>
+                          <div className="min-w-0">
                             <p className="text-sm font-medium text-foreground">
                               {f.title}
                             </p>
-                            <p className="text-[11px] text-muted-foreground line-clamp-1">
+                            <p className="text-[11px] text-muted-foreground truncate">
                               {f.tagline}
                             </p>
                           </div>
@@ -109,7 +109,7 @@ export default function Navbar() {
                       );
                     })}
                   </div>
-                  <div className="mt-3 pt-3 border-t border-white/10">
+                  <div className="mt-4 pt-3 border-t border-white/10">
                     <Link
                       href="/features"
                       onClick={() => setFeaturesOpen(false)}
