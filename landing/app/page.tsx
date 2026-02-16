@@ -19,11 +19,11 @@ export default function Home() {
       <ParallaxSection speed={0.03}>
         <FeaturesGrid />
       </ParallaxSection>
-      <ParallaxSection speed={0.04}>
-        <ContractingSection />
-      </ParallaxSection>
       <ParallaxSection speed={0.03}>
         <PricingSection />
+      </ParallaxSection>
+      <ParallaxSection speed={0.04}>
+        <ContractingSection />
       </ParallaxSection>
       <ParallaxSection speed={0.02}>
         <Testimonials />
