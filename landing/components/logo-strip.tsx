@@ -1,18 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
 
 const logos = [
-  { name: "Mutual of Omaha", abbr: "MoO" },
-  { name: "Transamerica", abbr: "TA" },
-  { name: "National Life Group", abbr: "NLG" },
-  { name: "Nationwide", abbr: "NW" },
-  { name: "Pacific Life", abbr: "PL" },
-  { name: "Protective", abbr: "PR" },
-  { name: "North American", abbr: "NA" },
-  { name: "Foresters", abbr: "FO" },
+  { name: "National Life Group", src: "/logos/national-life-group.png", filter: "" },
+  { name: "Nationwide", src: "/logos/nationwide.png", filter: "" },
+  { name: "North American", src: "/logos/north-american.webp", filter: "" },
+  { name: "Protective Life", src: "/logos/protective-life.png", filter: "brightness-0 invert" },
 ];
 
 export default function LogoStrip() {
@@ -30,7 +27,7 @@ export default function LogoStrip() {
             Trusted by agents working with top carriers
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 max-w-4xl mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 max-w-5xl mx-auto">
             {logos.map((logo, i) => (
               <motion.div
                 key={logo.name}
@@ -38,11 +35,15 @@ export default function LogoStrip() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, duration: 0.4 }}
-                className="flex items-center gap-2 text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors duration-300"
+                className="relative h-8 w-auto opacity-40 hover:opacity-70 transition-opacity duration-300"
               >
-                <span className="text-sm font-semibold tracking-wide whitespace-nowrap">
-                  {logo.name}
-                </span>
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  width={160}
+                  height={32}
+                  className={`h-8 w-auto object-contain ${logo.filter}`}
+                />
               </motion.div>
             ))}
           </div>

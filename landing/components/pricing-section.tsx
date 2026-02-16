@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Sparkles, Crown } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Crown, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MagneticButton from "@/components/ui/magnetic-button";
 import PricingValueTable from "@/components/pricing-value-table";
@@ -229,6 +229,22 @@ export default function PricingSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Guarantee Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={spring}
+          className="flex items-center justify-center gap-3 mt-10 mb-2"
+        >
+          <div className="flex items-center gap-2 glass rounded-full px-5 py-2.5">
+            <ShieldCheck className="h-5 w-5 text-primary" />
+            <span className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">14-day money-back guarantee</span> · No credit card required · Cancel anytime
+            </span>
+          </div>
+        </motion.div>
 
         {/* Value Comparison Table */}
         <PricingValueTable />

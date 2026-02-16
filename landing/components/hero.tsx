@@ -89,11 +89,16 @@ export default function Hero() {
             {/* Subheadline */}
             <motion.p
               {...blurUp(0.35)}
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
+              className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-4 leading-relaxed"
             >
-              Everything you need to build, run, and scale your insurance business
-              — training, CRM, marketing, AI tools, and contracting — all under
-              one roof.
+              Replace 12+ tools and save over $3,000/mo — training, CRM, marketing,
+              AI tools, and contracting — all under one roof.
+            </motion.p>
+            <motion.p
+              {...blurUp(0.4)}
+              className="text-sm text-primary font-semibold mb-10"
+            >
+              Starting at $250/mo · No credit card required · 14-day money-back guarantee
             </motion.p>
 
             {/* CTAs */}
