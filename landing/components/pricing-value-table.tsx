@@ -26,12 +26,12 @@ const replacements: ReplacementRow[] = [
   {
     feature: "Funnel Builder",
     replaces: ["ClickFunnels", "Leadpages"],
-    otherToolsCost: "$150/mo",
+    otherToolsCost: "$297/mo",
   },
   {
     feature: "Email & SMS Marketing",
     replaces: ["Mailchimp", "ActiveCampaign"],
-    otherToolsCost: "$100/mo",
+    otherToolsCost: "$149/mo",
   },
   {
     feature: "Website Builder",
@@ -41,17 +41,17 @@ const replacements: ReplacementRow[] = [
   {
     feature: "Workflow Automations",
     replaces: ["Zapier", "Make"],
-    otherToolsCost: "$100/mo",
+    otherToolsCost: "$159/mo",
   },
   {
     feature: "Social Media Management",
     replaces: ["Hootsuite", "Buffer"],
-    otherToolsCost: "$30/mo",
+    otherToolsCost: "$99/mo",
   },
   {
     feature: "Advanced AI Tools",
     replaces: ["ChatGPT Pro", "Jasper"],
-    otherToolsCost: "$99/mo",
+    otherToolsCost: "$299/mo",
   },
   {
     feature: "Scheduling & Booking",
@@ -71,7 +71,17 @@ const replacements: ReplacementRow[] = [
   {
     feature: "Analytics & Reporting",
     replaces: ["Google Analytics 360", "Mixpanel"],
-    otherToolsCost: "$150/mo",
+    otherToolsCost: "$299/mo",
+  },
+  {
+    feature: "Live Monthly Webinars",
+    replaces: ["Masterclass", "Industry Coaching"],
+    otherToolsCost: "$497/mo",
+  },
+  {
+    feature: "Casey's Content Vault",
+    replaces: ["Unique to LIFEWiZE"],
+    otherToolsCost: "$997/mo",
   },
 ];
 
@@ -89,7 +99,7 @@ export default function PricingValueTable() {
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-60px" }}
       transition={spring}
-      className="max-w-4xl mx-auto mt-20"
+      className="max-w-6xl mx-auto mt-20"
     >
       {/* Toggle Header */}
       <button
@@ -123,8 +133,8 @@ export default function PricingValueTable() {
             className="overflow-hidden"
           >
             <div className="glass rounded-2xl mt-3 overflow-hidden">
-              {/* Table Header */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-white/10 bg-white/[0.03]">
+              {/* Table Header — hidden on mobile */}
+              <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-4 border-b border-white/10 bg-white/[0.03]">
                 <div className="col-span-4">
                   <span className="text-xs font-bold text-primary uppercase tracking-widest">
                     Feature
@@ -154,14 +164,20 @@ export default function PricingValueTable() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03 }}
-                  className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-white/5 hover:bg-white/[0.03] transition-colors items-center"
+                  className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 px-6 py-4 border-b border-white/5 hover:bg-white/[0.03] transition-colors items-center"
                 >
-                  <div className="col-span-4">
+                  <div className="md:col-span-4 flex items-center justify-between md:block">
                     <span className="text-sm font-semibold text-foreground">
                       {row.feature}
                     </span>
+                    <div className="flex items-center gap-3 md:hidden">
+                      <span className="text-sm text-muted-foreground line-through decoration-red-400/50">
+                        {row.otherToolsCost}
+                      </span>
+                      <Check className="h-4 w-4 text-primary" />
+                    </div>
                   </div>
-                  <div className="col-span-3">
+                  <div className="md:col-span-3">
                     <div className="flex flex-wrap gap-1.5">
                       {row.replaces.map((tool) => (
                         <span
@@ -173,34 +189,37 @@ export default function PricingValueTable() {
                       ))}
                     </div>
                   </div>
-                  <div className="col-span-3 text-center">
+                  <div className="hidden md:block md:col-span-3 text-center">
                     <span className="text-sm text-muted-foreground line-through decoration-red-400/50">
                       {row.otherToolsCost}
                     </span>
                   </div>
-                  <div className="col-span-2 flex justify-center">
+                  <div className="hidden md:flex md:col-span-2 justify-center">
                     <Check className="h-5 w-5 text-primary" />
                   </div>
                 </motion.div>
               ))}
 
               {/* Total Row */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-5 bg-gradient-to-r from-primary/10 to-primary-glow/5 items-center">
-                <div className="col-span-4">
+              <div className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 px-6 py-5 bg-gradient-to-r from-primary/10 to-primary-glow/5 items-center">
+                <div className="md:col-span-4">
                   <span className="text-base font-bold text-primary uppercase tracking-wide">
                     Total Cost
                   </span>
                 </div>
-                <div className="col-span-3" />
-                <div className="col-span-3 text-center">
+                <div className="hidden md:block md:col-span-3" />
+                <div className="md:col-span-3 text-center">
                   <span className="text-lg font-bold text-muted-foreground line-through decoration-red-400/60">
                     ${totalOtherCost.toLocaleString()}/mo
                   </span>
                 </div>
-                <div className="col-span-2 text-center">
-                  <span className="text-lg font-bold text-primary">
-                    $1,000/mo
-                  </span>
+                <div className="md:col-span-2 text-center">
+                  <div className="text-lg font-bold text-primary">
+                    $250/mo
+                  </div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5">
+                    Starting at
+                  </div>
                 </div>
               </div>
             </div>

@@ -44,6 +44,19 @@
   .section-padding {
     @apply py-20 md:py-28 lg:py-32;
   }
+
+  .section-alt {
+    @apply bg-white/[0.015];
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes shimmer {

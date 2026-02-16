@@ -138,7 +138,7 @@ function CategorySection({ category, index }: { category: Category; index: numbe
         onClick={() => setOpen(!open)}
         className="w-full grid grid-cols-12 gap-4 px-6 py-4 bg-white/[0.03] hover:bg-white/[0.06] transition-colors items-center"
       >
-        <div className="col-span-5 flex items-center gap-3 text-left">
+        <div className="col-span-12 md:col-span-5 flex items-center gap-3 text-left">
           <motion.div
             animate={{ rotate: open ? 180 : 0 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
@@ -149,7 +149,7 @@ function CategorySection({ category, index }: { category: Category; index: numbe
             {category.name}
           </span>
         </div>
-        <div className="col-span-7" />
+        <div className="hidden md:block col-span-7" />
       </button>
 
       <AnimatePresence>
@@ -165,23 +165,35 @@ function CategorySection({ category, index }: { category: Category; index: numbe
               <div
                 key={feature.name}
                 className={cn(
-                  "grid grid-cols-12 gap-4 px-6 py-3.5 items-center hover:bg-white/[0.02] transition-colors",
+                  "px-6 py-3.5 hover:bg-white/[0.02] transition-colors",
                   i < category.features.length - 1 && "border-b border-white/[0.03]"
                 )}
               >
-                <div className="col-span-5 pl-7">
-                  <span className="text-sm text-muted-foreground">
-                    {feature.name}
-                  </span>
+                {/* Desktop layout */}
+                <div className="hidden md:grid grid-cols-12 gap-4 items-center">
+                  <div className="col-span-5 pl-7">
+                    <span className="text-sm text-muted-foreground">
+                      {feature.name}
+                    </span>
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <CellDisplay value={feature.foundations} />
+                  </div>
+                  <div className="col-span-3 text-center">
+                    <CellDisplay value={feature.pro} />
+                  </div>
+                  <div className="col-span-2 text-center">
+                    <CellDisplay value={feature.proContract} />
+                  </div>
                 </div>
-                <div className="col-span-2 text-center">
-                  <CellDisplay value={feature.foundations} />
-                </div>
-                <div className="col-span-3 text-center">
-                  <CellDisplay value={feature.pro} />
-                </div>
-                <div className="col-span-2 text-center">
-                  <CellDisplay value={feature.proContract} />
+                {/* Mobile layout */}
+                <div className="md:hidden pl-7">
+                  <p className="text-sm text-muted-foreground mb-2">{feature.name}</p>
+                  <div className="flex items-center gap-4 text-xs">
+                    <span className="flex items-center gap-1 text-muted-foreground/60"><span className="font-medium">Found.</span> <CellDisplay value={feature.foundations} /></span>
+                    <span className="flex items-center gap-1 text-primary/80"><span className="font-medium">Pro</span> <CellDisplay value={feature.pro} /></span>
+                    <span className="flex items-center gap-1 text-gold/80"><span className="font-medium">Contract</span> <CellDisplay value={feature.proContract} /></span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -201,7 +213,7 @@ export default function PricingComparisonMatrix() {
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-60px" }}
       transition={spring}
-      className="max-w-4xl mx-auto mt-8"
+      className="max-w-6xl mx-auto mt-8"
     >
       {/* Toggle Header */}
       <button
@@ -236,8 +248,8 @@ export default function PricingComparisonMatrix() {
             className="overflow-hidden"
           >
             <div className="glass rounded-2xl mt-3 overflow-hidden">
-              {/* Sticky Column Headers */}
-              <div className="grid grid-cols-12 gap-4 px-6 py-5 border-b border-white/10 bg-white/[0.04]">
+              {/* Column Headers — hidden on mobile */}
+              <div className="hidden md:grid grid-cols-12 gap-4 px-6 py-5 border-b border-white/10 bg-white/[0.04]">
                 <div className="col-span-5">
                   <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                     Features
@@ -255,6 +267,10 @@ export default function PricingComparisonMatrix() {
                   <p className="text-xs font-bold text-gold uppercase tracking-wide">Pro (Contract)</p>
                   <p className="text-[11px] text-muted-foreground mt-0.5">$500/mo</p>
                 </div>
+              </div>
+              {/* Mobile Header */}
+              <div className="md:hidden px-6 py-4 border-b border-white/10 bg-white/[0.04]">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Features by plan</p>
               </div>
 
               {/* Category Sections */}
