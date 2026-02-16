@@ -6,7 +6,8 @@
   "workspaces": [
     "resource-center",
     "ai-sales-call-trainer",
-    "landing"
+    "landing",
+    "financial-landing"
   ],
   "scripts": {
     "dev:resource-center": "npm run dev --workspace=resource-center",
@@ -15,6 +16,8 @@
     "build:resource-center": "npm run build --workspace=resource-center",
     "build:ai-trainer": "npm run build --workspace=ai-sales-call-trainer",
     "build:landing": "npm run build --workspace=landing",
+    "dev:financial-landing": "npm run dev --workspace=financial-landing",
+    "build:financial-landing": "npm run build --workspace=financial-landing",
     "build:all": "npm run build --workspaces",
     "lint": "npm run lint --workspaces",
     "clean": "rm -rf **/node_modules **/.next **/dist **/.turbo"

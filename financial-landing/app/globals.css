@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: hsla(38, 65%, 52%, 0.25);
+    color: hsl(40, 20%, 95%);
+  }
+}
+
+@layer components {
+  /* Solid card surfaces — not glassy */
+  .pro-card {
+    background: hsl(222, 47%, 11%);
+    border: 1px solid hsl(222, 44%, 18%);
+    border-radius: 1rem;
+  }
+
+  .pro-card-elevated {
+    background: hsl(222, 44%, 18%);
+    border: 1px solid hsl(222, 40%, 25%);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Subtle divider line with gold fade */
+  .divider-gold {
+    background: linear-gradient(90deg, transparent, hsl(38, 65%, 52%, 0.3), transparent);
+    height: 1px;
+  }
+}
+
+@layer utilities {
+  /* Keep glass but more subtle — used sparingly */
+  .glass {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: hsla(222, 47%, 11%, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    background: hsla(222, 47%, 11%, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gradient-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, hsl(38, 65%, 52%), hsl(38, 60%, 62%));
+  }
+
+  .gradient-text-accent {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, hsl(155, 60%, 45%), hsl(160, 60%, 50%));
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 60px hsla(38, 65%, 52%, 0.15), 0 0 120px hsla(38, 65%, 52%, 0.05);
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+
+  .section-alt {
+    background: linear-gradient(180deg, hsl(222, 47%, 7%) 0%, hsl(222, 44%, 9%) 50%, hsl(222, 47%, 7%) 100%);
+  }
+
+  /* Gold rule — thin accent line */
+  .gold-rule {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(38, 65%, 52%), hsl(38, 60%, 62%));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
