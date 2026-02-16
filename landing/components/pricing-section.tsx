@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Crown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MagneticButton from "@/components/ui/magnetic-button";
+import PricingValueTable from "@/components/pricing-value-table";
+import PricingComparisonMatrix from "@/components/pricing-comparison-matrix";
 
 const spring = { type: "spring" as const, stiffness: 80, damping: 18 };
 
@@ -227,6 +229,12 @@ export default function PricingSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Value Comparison Table */}
+        <PricingValueTable />
+
+        {/* Full Feature Comparison Matrix */}
+        <PricingComparisonMatrix />
       </div>
     </section>
   );
